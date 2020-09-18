@@ -114,31 +114,33 @@
 
 <body>
   <h1>RSS Namespace Extension for Podcast Transcripts</h1>
-  <p>Transcripts for podcasts provide a lot of real-world benefits. They improve accessibility for the hearing impaired, improve search engine optimization, and provide the opportunity to read along while listening. Many podcasters provide transcripts for each episode. This namespace makes those transcript files available as part of the standard podcast RSS feed.</p>
+  <p>Transcripts for podcasts provide a lot of real-world benefits. They improve accessibility for the hearing impaired, improve search engine optimization, and provide the opportunity to read along while listening. Many podcasters provide transcripts for each episode. This namespace makes those transcripts available in various formats as part of the standard podcast RSS feed.</p>
   <h5>Episode Tag</h5>
   <p><strong>Parent Tag</strong>: <code>&lt;item&gt;</code></p>
   <p><strong>Episode Tag</strong>: <code>&lt;podcast:transcript&gt;</code></p>
-  <p><strong>Usage</strong>: Signifies that a transcript is available and provides file location and type.</p>
+  <p><strong>Usage</strong>: Signifies that a transcript is available and provides a location and type.</p>
   <h5>Details and Examples</h5>
   <p>The &lt;podcast:transcript&gt; tag has two attributes: URL, and type:</p>
   <ul>
-    <li><p><strong>URL</strong>: The URL attribute points to your podcast transcript file. Supported file formats include SRT and HTML.</p></li>
-    <li><p><strong>type</strong>: The type attribute provides the correct category for the type of file you are using. The type values for the supported file formats are <code>application/srt</code> and <code>application/html</code>.</p></li>
+    <li><p><strong>URL</strong>: The URL attribute points to your podcast transcript. Supported formats include SRT, JSON, and HTML.</p></li>
+    <li><p><strong>type</strong>: The type attribute provides the correct MIME type for the transcript. The type values supported are  <code>application/srt</code>, <code>application/json</code>, and <code>application/html</code>.</p></li>
   </ul>
   <p><strong>Examples:</strong></p>
     <pre>
       <code>&lt;podcast:transcript url="https://host.com/1.srt" type="application/srt" /&gt;</code>
       <code>&lt;podcast:transcript url="https://host.com/1.html" type="application/html" /&gt;</code>
+      <code>&lt;podcast:transcript url="https://host.com/1.json" type="application/json" /&gt;</code>
     </pre>
-  <p>* All available transcript file formats should be included.</p>
-  <p><strong>Sample Files:</strong></p>
+  <p>* All available transcript formats should be included.</p>
+  <p><strong>Samples:</strong></p>
   <p>
-    <a href="#">RSS Feed with Transcript Tags</a><br>
-    <a href="#">SRT Podcast Transcript File</a><br>
-    <a href="#">HTML Podcast Transcript File</a>
+    <a href="https://feeds.buzzsprout.com/231452.rss">RSS Feed with Transcript Tags</a><br>
+    <a href="https://feeds.buzzsprout.com/231452/2017032.srt">SRT Transcript</a><br>
+    <a href="https://feeds.buzzsprout.com/231452/2017032.json">JSON Transcript</a>
+    <a href="https://feeds.buzzsprout.com/231452/2017032">HTML Transcript</a>
   </p>
   <h5>SRT Format and Example Code</h5>
-  <p>The SRT format was designed for video captions but provides a suitable solution for podcast transcripts. SRT files contain medium-fidelity timestamps and are a popular export option from transcription services. SRT files used for podcast transcripts should adhere to the following specifications.</p>
+  <p>The SRT format was designed for video captions but provides a suitable solution for podcast transcripts. The SRT format contains medium-fidelity timestamps and are a popular export option from transcription services. SRT transcripts used for podcasts should adhere to the following specifications.</p>
   <p>
     Max number of lines: <strong>2</strong><br>
     Max characters per line: <strong>32</strong><br>
@@ -178,34 +180,66 @@ here from breaking through
 00:00:21,450 --> 00:00:25,350
 careers podcast. My question is,
 do we need a podcast trailer?</code></pre>
-  <h5>HTML Format and Example Code</h5>
-  <p>The HTML transcript format provides a solution when a transcript is available but no or limited timecode data is available. HTML transcript files are considered low-fidelity and are designed to serve as an accessibility aid and provide searchable episode content. HTML files used for podcast transcripts should adhere to the following specifications.</p>
-  <p id="tags">HTML tags used:<br>
-    <code>&lt;!doctype html&gt;</code>: HTML Doctype.</code><br>
-    <code>&lt;html lang="en"&gt;</strong>: Language of transcript.</code><br>
-    <code>&lt;title&gt;</strong>: Title of podcast episode.</code><br>
-    <code>&lt;meta name="description"&gt;</code>: Short description of podcast episode.</strong><br>
-    <code>&lt;link rel="canonical"&gt;</code>: Master episode URL corresponding to this transcript.</strong><br>
-    <code>&lt;cite&gt;</code>: Name of the speaker (if available).</strong><br>
-    <code>&lt;time&gt;</code>: Start time of monologue (if available).</strong><br>
-    <code>&lt;p&gt;</code>: Content of monologue.</strong>
+  <h5>JSON Format and Example Code</h5>
+  <p>The JSON representation is a flexible format that accomodates various degrees of fidelity in a concise way. This format for podcast transcripts should adhere to the following specifications.</p>
+  <p id="tags">Elements included in this representation:<br>
+    <code>&lt;version&gt;</code>: The version of JSON transcript specification</strong><br>
+    <code>&lt;segments&gt;</code>: An array of dialogue elements (segments)</strong><br>
+    <code>&lt;speaker&gt;</code>: Speaker</strong><br>
+    <code>&lt;start_time&gt;</code>: Start time for the segment</strong><br>
+    <code>&lt;end_time&gt;</code>: End time for the segment (if available)</strong><br>
+    <code>&lt;body&gt;</code>: Dialogue content</strong>
   </p>
-  <pre><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;title&gt;Title of Podcast Episode&lt;/title&gt;
-  &lt;meta name="description" content="Description of Podcast Episode"&gt;
-  &lt;link rel="canonical" href="https://example.com/podcast/1/" /&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;cite&gt;Kevin :&lt;/cite&gt;
-  &lt;time&gt;0:00&lt;/time&gt;
-  &lt;p&gt;We have an update planned where we would like to give the ability to upload an artwork file for these videos&lt;/p&gt;
-  &lt;cite&gt;Alban :&lt;/cite&gt;
-  &lt;time&gt;0:09&lt;/time&gt;
-  &lt;p&gt;You're triggering Tom right now with a hey, here's a cool feature.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+  <pre><code>{
+  "version": "1.0.0",
+  "segments": [
+    {
+      "speaker": "Darth Vader",
+      "start_time": 0.5,
+      "end_time": 0.75,
+      "body": "I"
+    },
+    {
+      "speaker": "Darth Vader",
+      "start_time": 1,
+      "end_time": 1.25,
+      "body": "am"
+    },
+    {
+      "speaker": "Darth Vader",
+      "start_time": 1.5,
+      "end_time": 2.0,
+      "body": "your"
+    },
+    {
+      "speaker": "Darth Vader",
+      "start_time": 2.25,
+      "end_time": 2.50,
+      "body": "father."
+    },
+    {
+      "speaker": "Luke",
+      "start_time": 2.75,
+      "end_time": 3.0,
+      "body": "Nooooo"
+    }
+  ]
+}</code></pre>
+  <hr>
+
+  <h5>HTML Format and Example Code</h5>
+  <p>The HTML transcript format provides a solution when a transcript is available but no or limited timecode data is available. HTML transcript files are considered low-fidelity and are designed to serve as an accessibility aid and provide searchable episode content. The HTML format used for podcast transcripts should adhere to the following specifications.</p>
+  <p id="tags">HTML tags used:<br>
+    <code>&lt;cite&gt;</code>: Name of the speaker (if available)</strong><br>
+    <code>&lt;time&gt;</code>: Start time of monologue (if available)</strong><br>
+    <code>&lt;p&gt;</code>: Content of monologue</strong>
+  </p>
+  <pre><code>&lt;cite&gt;Kevin:&lt;/cite&gt;
+&lt;time&gt;0:00&lt;/time&gt;
+&lt;p&gt;We have an update planned where we would like to give the ability to upload an artwork file for these videos&lt;/p&gt;
+&lt;cite&gt;Alban :&lt;/cite&gt;
+&lt;time&gt;0:09&lt;/time&gt;
+&lt;p&gt;You're triggering Tom right now with a hey, here's a cool feature.&lt;/p&gt;</code></pre>
   <hr>
   <footer>
     <cite>Crafted with ❤ by your friends at <a href="https://www.buzzsprout.com">Buzzsprout</a></cite>
