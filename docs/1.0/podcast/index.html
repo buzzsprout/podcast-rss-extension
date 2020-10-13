@@ -123,12 +123,12 @@
   <p>The &lt;podcast:transcript&gt; tag has two attributes: URL, and type:</p>
   <ul>
     <li><p><strong>URL</strong>: The URL attribute points to your podcast transcript. Supported formats include SRT, JSON, and HTML.</p></li>
-    <li><p><strong>type</strong>: The type attribute provides the correct MIME type for the transcript. The type values supported are  <code>application/srt</code>, <code>application/json</code>, and <code>application/html</code>.</p></li>
+    <li><p><strong>type</strong>: The type attribute provides the correct MIME type for the transcript. The type values supported are  <code>application/srt</code>, <code>application/json</code>, and <code>text/html</code>.</p></li>
   </ul>
   <p><strong>Examples:</strong></p>
     <pre>
       <code>&lt;podcast:transcript url="https://host.com/1.srt" type="application/srt" /&gt;</code>
-      <code>&lt;podcast:transcript url="https://host.com/1.html" type="application/html" /&gt;</code>
+      <code>&lt;podcast:transcript url="https://host.com/1.html" type="text/html" /&gt;</code>
       <code>&lt;podcast:transcript url="https://host.com/1.json" type="application/json" /&gt;</code>
     </pre>
   <p>* All available transcript formats should be included.</p>
